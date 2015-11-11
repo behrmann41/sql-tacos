@@ -1,4 +1,4 @@
-extend ../layout
+extends ../layout
 
 block content
   .container
@@ -10,11 +10,14 @@ block content
             tr
               th Shell
               th Taste
+              th Id
           tbody
             for taco in tacos
               tr
                 td= taco.shell
                 td= taco.taste
+                td
+                  a(href='/tacos/' + taco.id)= taco.id
         h3 Add a Taco
         form.form-horizontal(action='/tacos', method='POST')
           .form-group

@@ -40,4 +40,24 @@ router.post('/', function (req, res, next){
   });
 })
 
+router.get('/:id', function (req, res, next){
+  pg.connect(conString, function(err, client, done) {
+
+    if (err) {
+      return console.error('error fetching client from pool', err);
+    }
+    client.query('SELECT * from tacos where id = $1',[req.params.id], function(err, result) {
+      console.log(result.rows)
+      done();
+      res.render('tacos/show', {taco: result.rows[0]})
+      if (err) {
+        return console.error('error running query', err);
+      }
+      console.log(result.rows[0].number);
+      console.log("connected to database")
+    });
+
+  });
+})
+
 module.exports = router;
