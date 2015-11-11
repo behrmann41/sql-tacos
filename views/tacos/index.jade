@@ -1,0 +1,29 @@
+extend ../layout
+
+block content
+  .container
+    h1 My Tacos
+    .row
+      .col-md-6
+        table.table.table-bordered.table-striped
+          thead
+            tr
+              th Shell
+              th Taste
+          tbody
+            for taco in tacos
+              tr
+                td= taco.shell
+                td= taco.taste
+        h3 Add a Taco
+        form.form-horizontal
+          .form-group
+            label.col-sm-2.control-label(for='shell') Shell
+            .col-sm-10
+              input#shell.form-control(type='text', placeholder='Shell Type')
+          .form-group
+            label.col-sm-2.control-label(for='inputPassword3') Taste
+            .col-sm-10
+              input#taste.form-control(type='text', placeholder='How did the taco taste??')
+
+        
