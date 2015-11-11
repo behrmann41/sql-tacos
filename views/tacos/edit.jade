@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  h3 Edit Taco
+  form.form-horizontal(action='/tacos/' + taco.id + '/edit', method='POST')
+    .form-group
+      label.col-sm-2.control-label(for='shell') Shell
+      .col-sm-10
+        input#shell.form-control(type='text', name='shell' placeholder='Shell Type' value=taco.shell)
+    .form-group
+      label.col-sm-2.control-label(for='taste') Taste
+      .col-sm-10
+        input#taste.form-control(type='text', name='taste' placeholder='How did the taco taste??' value=taco.taste)
+    .form-group
+      input.btn.btn-success(type='submit' value='Update Taco')

@@ -60,4 +60,35 @@ router.get('/:id', function (req, res, next){
   });
 })
 
+router.get('/:id/edit', function (req, res, next){
+  pg.connect(conString, function (err, client, done){
+    if (err) {
+      return console.error('error fetching client from pool', err);
+    }
+    client.query('SELECT * from tacos where id = $1',[req.params.id], function(err, result) {
+      done();
+      res.render('tacos/edit', {taco: result.rows[0]})
+      if (err) {
+        return console.error('error running query', err);
+      }
+    });
+
+  })
+})
+
+router.post('/:id/edit', function (req, res, next){
+  pg.connect(conString, function (err, client, done){
+    if (err) {
+      return console.error('error fetching client from pool', err);
+    }
+    client.query('UPDATE tacos SET shell = $1, taste = $2 where id = $3 returning id',[req.body.shell, req.body.taste, req.params.id], function(err, result) {
+      done();
+      res.redirect('/tacos/' + req.params.id)
+      if (err) {
+        return console.error('error running query', err);
+      }
+    });
+  })
+})
+
 module.exports = router;
