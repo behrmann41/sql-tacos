@@ -13,3 +13,7 @@ block content
         input#taste.form-control(type='text', name='taste' placeholder='How did the taco taste??' value=taco.taste)
     .form-group
       input.btn.btn-success(type='submit' value='Update Taco')
+
+  form.form-horizontal(action='/tacos/' + taco.id + '/delete', method='POST')
+    .form-group
+      input.btn.btn-danger(type='submit' value='Delete Taco')

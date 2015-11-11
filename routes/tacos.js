@@ -91,4 +91,19 @@ router.post('/:id/edit', function (req, res, next){
   })
 })
 
+router.post('/:id/delete', function (req, res, next){
+  pg.connect(conString, function (err, client, done){
+    if (err) {
+      return console.error('error fetching client from pool', err);
+    }
+    client.query('DELETE from tacos WHERE id = $1',[req.params.id], function(err, result) {
+      done();
+      res.redirect('/tacos')
+      if (err) {
+        return console.error('error running query', err);
+      }
+    });
+  })
+})
+
 module.exports = router;
