@@ -16,14 +16,16 @@ block content
                 td= taco.shell
                 td= taco.taste
         h3 Add a Taco
-        form.form-horizontal
+        form.form-horizontal(action='/tacos', method='POST')
           .form-group
             label.col-sm-2.control-label(for='shell') Shell
             .col-sm-10
-              input#shell.form-control(type='text', placeholder='Shell Type')
+              input#shell.form-control(type='text', name='shell' placeholder='Shell Type')
           .form-group
-            label.col-sm-2.control-label(for='inputPassword3') Taste
+            label.col-sm-2.control-label(for='taste') Taste
             .col-sm-10
-              input#taste.form-control(type='text', placeholder='How did the taco taste??')
+              input#taste.form-control(type='text', name='taste' placeholder='How did the taco taste??')
+          .form-group
+            input.btn.btn-success(type='submit' value='Add Taco')
 
         

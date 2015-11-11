@@ -22,4 +22,22 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.post('/', function (req, res, next){
+  pg.connect(conString, function(err, client, done) {
+
+    if (err) {
+      return console.error('error fetching client from pool', err);
+    }
+    client.query('INSERT INTO tacos(shell, taste) VALUES($1, $2) returning id',[req.body.shell, req.body.taste], function(err, result) {
+      done();
+      res.redirect('/tacos')
+      if (err) {
+        return console.error('error running query', err);
+      }
+      console.log("connected to database")
+    });
+
+  });
+})
+
 module.exports = router;
